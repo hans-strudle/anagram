@@ -1,0 +1,114 @@
+body {
+    color: #282828;
+    background-color: #e4e4e4;
+    font-family: monospace;
+    font-size: 24px;
+    font-style: italic;
+    text-transform: capitalize;
+    align-content: center;
+    transition: opacity 1s;
+}
+
+div {
+    margin: 10px auto;
+    width: 90%;
+    text-align:center;
+}
+.hint-div {
+    padding: 10px;
+}
+#inputs input {
+    margin-left: 3px;
+
+}
+#hint-div button {
+    width: 80px;
+    height: 30px;
+    border:none;
+    background: #00dbe0;
+
+}
+#hint-div button:hover {
+    cursor: help;
+}
+.sentence-hint {
+    font-size: 14px;
+    color: #00BCD4;
+    opacity: 0;
+    transition: 0.5s opacity;
+}
+.type-hint {
+    color: #00BCD4;
+    text-decoration: underline;    
+}
+#score-div {
+    font-size: 16px;
+}
+
+input {
+    font-size: 32px;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid #00BCD4;
+    background: #fdfdfd;
+    text-transform: capitalize;
+    font-style: italic;
+}
+
+input:disabled {
+    text-decoration: underline #4CAF50;
+    color: #00BCD4;
+    background: #cfcfcf;
+
+}
+
+@keyframes shake-up {
+  0% {
+    margin-bottom: 0rem;
+        margin-left: 0rem;
+
+  }
+  25% {
+    margin-bottom: 0.2rem;
+  }
+  75% {
+    margin-bottom: -0.1rem;
+    margin-left: 0.1rem;
+  }
+  100% {
+    margin-bottom: 0rem;
+  }
+}
+
+
+@keyframes shake {
+  0% {
+    margin-left: 0rem;
+  }
+  25% {
+    margin-left: 0.2rem;
+  }
+  75% {
+    margin-left: -0.2rem;
+  }
+  100% {
+    margin-left: 0rem;
+  }
+}
+
+input:invalid {
+  animation: shake 0.2s ease-in-out 0s 2;
+  box-shadow: 0 0 0.3rem #ff0000;
+}
+
+input.incorrect {
+     animation: shake-up 0.2s ease-in-out 0s 2;
+     box-shadow: 0 0 0.3rem #FF5722;
+}
+
+input.solved {
+     animation: shake-up 0.2s ease-in-out 0s 2;
+     box-shadow: 0 0 0.3rem #2cff00;
+}
