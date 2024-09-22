@@ -231,6 +231,8 @@ function load() {
     checkButton.onclick = (e) => {
         console.log(topString, bottomString);
         let cl = ' incorrect';
+        alert(topString)
+        alert(bottomString)
         if (topString == top_word && bottomString == bottom_word) {
             cl = ' solved';
             nextButton.disabled = false;
