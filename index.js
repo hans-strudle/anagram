@@ -204,8 +204,12 @@ function load() {
         let hintDiv = hint.top ? topMainHintDiv : bottomMainHintDiv;
         switch (hint.type) {
             case "type":
-                hintDiv.innerHTML += 
-                    " <span class='type-hint'>" + hint.hint + "</span>";
+                let span = document.createElement('span');
+                span.className = 'type-hint';
+                span.innerHTML = hint.hint;
+                hintDiv.appendChild(span);
+                //hintDiv.innerHTML += 
+                //    " <span class='type-hint'>" + hint.hint + "</span>";
                 break;
             case "sentence":
                 let div = hint.top ? 

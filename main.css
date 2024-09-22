@@ -2,7 +2,7 @@ body {
     color: #282828;
     background-color: #e4e4e4;
     font-family: monospace;
-    font-size: 24px;
+    font-size: 28px;
     font-style: italic;
     text-transform: capitalize;
     align-content: center;
@@ -39,6 +39,7 @@ div {
     height: 30px;
     border: none;
     background: #00dbe0;
+    font-size: 16px;
     font-family: "Titillium Web", sans-serif;
     font-weight: 500;
 }
@@ -52,15 +53,17 @@ div {
 }
 
 .sentence-hint {
-    font-size: 14px;
+    font-size: 16px;
     color: #00BCD4;
     opacity: 0;
     transition: 0.5s opacity;
+    min-height: 22px;
 }
 
 .type-hint {
     color: #00BCD4;
     text-decoration: underline;
+    transition: opacity 0.4s;
 }
 
 #score-div {
