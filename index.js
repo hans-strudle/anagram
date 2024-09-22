@@ -229,9 +229,21 @@ function load() {
     }
 
     checkButton.onclick = (e) => {
-        console.log(topString, bottomString);
         let cl = ' incorrect';
-        if (topString.toLowerCase() == top_word.toLowerCase() && bottomString.toLowerCase() == bottom_word.toLowerCase()) {
+        const topInputs = document.querySelectorAll('#top-answer input');
+        const bottomInputs = document.querySelectorAll('#bottom-answer input');
+        const topAnswer = Array.from(topInputs)
+            .map(e => e.value)
+            .join('')
+            .toLowerCase();
+        const bottomAnswer = Array.from(bottomInputs)
+            .map(e => e.value)
+            .join('')
+            .toLowerCase();
+
+        console.log(topAnswer, bottomAnswer);
+
+        if (topAnswer == top_word.toLowerCase() && bottomAnswer == bottom_word.toLowerCase()) {
             cl = ' solved';
             nextButton.disabled = false;
             // alert("solved!");
@@ -256,29 +268,19 @@ function load() {
         // load();
     }
 
-    let topString = '';
-    let bottomString = '';
-
     let onInput = (e) => {
         let back = e.inputType == 'deleteContentBackward';
         let trgt = e.target;
         let prv = trgt.previousElementSibling;
         if (back) {
             prv.focus()
-            trgt.__ana == "top" ? 
-                topString = topString.substring(0, topString.length - 1) :
-                bottomString = bottomString.substring(0, bottomString.length - 1);
-        } else {
-            trgt.__ana == "top" ? 
-                topString += e.data :
-                bottomString += e.data;
-        };
+        }
         let nxt = trgt.nextElementSibling;
         while (nxt && nxt.disabled) {
             nxt = nxt.nextElementSibling;
         }
         trgt.value ? (nxt && nxt.focus()) : (prv && prv.focus());
-        console.log(topString, bottomString);
+        // console.log(topString, bottomString);
     }
 
     for (let w in top_word) {

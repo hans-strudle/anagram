@@ -6,6 +6,9 @@ body {
     font-style: italic;
     text-transform: capitalize;
     align-content: center;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 300;
+    font-style: italic;
 }
 
 div {
@@ -21,13 +24,18 @@ div {
 }
 #inputs input {
     margin-left: 3px;
+  font-weight: 600;
+    font-style: normal;
 
 }
+
 #hint-div button {
     width: 80px;
     height: 30px;
     border:none;
     background: #00dbe0;
+    font-family: "Titillium Web", sans-serif;
+  font-weight: 500;
 }
 #hint:hover {
     cursor: help;
