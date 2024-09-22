@@ -231,9 +231,7 @@ function load() {
     checkButton.onclick = (e) => {
         console.log(topString, bottomString);
         let cl = ' incorrect';
-        alert(topString)
-        alert(bottomString)
-        if (topString == top_word && bottomString == bottom_word) {
+        if (topString.toLowerCase() == top_word.toLowerCase() && bottomString.toLowerCase() == bottom_word.toLowerCase()) {
             cl = ' solved';
             nextButton.disabled = false;
             // alert("solved!");
