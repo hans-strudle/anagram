@@ -14,45 +14,55 @@ body {
 div {
     margin: 10px auto;
     width: 100%;
-    text-align:center;
+    text-align: center;
+    
 }
+
 #main {
-  transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    padding-top: 100px;
+    
 }
+
 .hint-div {
     padding: 10px;
 }
+
 #inputs input {
     margin-left: 3px;
-  font-weight: 600;
+    font-weight: 600;
     font-style: normal;
-
 }
 
 #hint-div button {
     width: 80px;
     height: 30px;
-    border:none;
+    border: none;
     background: #00dbe0;
     font-family: "Titillium Web", sans-serif;
-  font-weight: 500;
+    font-weight: 500;
 }
+
 #hint:hover {
     cursor: help;
 }
+
 #hint-div button:enabled:hover {
-  background: #00cdd1;
+    background: #00cdd1;
 }
+
 .sentence-hint {
     font-size: 14px;
     color: #00BCD4;
     opacity: 0;
     transition: 0.5s opacity;
 }
+
 .type-hint {
     color: #00BCD4;
-    text-decoration: underline;    
+    text-decoration: underline;
 }
+
 #score-div {
     font-size: 16px;
 }
@@ -73,62 +83,66 @@ input:disabled {
     text-decoration: underline #4CAF50;
     color: #00BCD4;
     background: #cfcfcf;
-
 }
 
 @keyframes shake-up {
-  0% {
-    margin-bottom: 0rem;
+    0% {
+        margin-bottom: 0rem;
         margin-left: 0rem;
+    }
 
-  }
-  25% {
-    margin-bottom: 0.2rem;
-  }
-  75% {
-    margin-bottom: -0.1rem;
-    margin-left: 0.1rem;
-  }
-  100% {
-    margin-bottom: 0rem;
-  }
+    25% {
+        margin-bottom: 0.2rem;
+    }
+
+    75% {
+        margin-bottom: -0.1rem;
+        margin-left: 0.1rem;
+    }
+
+    100% {
+        margin-bottom: 0rem;
+    }
 }
 
-
 @keyframes shake {
-  0% {
-    margin-left: 0rem;
-  }
-  25% {
-    margin-left: 0.2rem;
-  }
-  75% {
-    margin-left: -0.2rem;
-  }
-  100% {
-    margin-left: 0rem;
-  }
+    0% {
+        margin-left: 0rem;
+    }
+
+    25% {
+        margin-left: 0.2rem;
+    }
+
+    75% {
+        margin-left: -0.2rem;
+    }
+
+    100% {
+        margin-left: 0rem;
+    }
 }
 
 input:invalid {
-  animation: shake 0.2s ease-in-out 0s 2;
-  box-shadow: 0 0 0.3rem #ff0000;
+    animation: shake 0.2s ease-in-out 0s 2;
+    box-shadow: 0 0 0.3rem #ff0000;
 }
 
 input.incorrect {
-     animation: shake-up 0.2s ease-in-out 0s 2;
-     box-shadow: 0 0 0.3rem #FF5722;
+    animation: shake-up 0.2s ease-in-out 0s 2;
+    box-shadow: 0 0 0.3rem #FF5722;
 }
 
 input.solved {
-     animation: shake-up 0.2s ease-in-out 0s 2;
-     box-shadow: 0 0 0.3rem #2cff00;
+    animation: shake-up 0.2s ease-in-out 0s 2;
+    box-shadow: 0 0 0.3rem #2cff00;
 }
+
 #next:enabled {
-  animation: shake-up 0.2s ease-in-out 0s 2;
-  box-shadow: 0 0 0.3rem #2cff00;
+    animation: shake-up 0.2s ease-in-out 0s 2;
+    box-shadow: 0 0 0.3rem #2cff00;
 }
+
 #hint-div > button#reset {
-  background:red;
-  
+    background: red;
 }
