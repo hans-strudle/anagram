@@ -277,7 +277,7 @@ function load() {
         while (nxt && nxt.disabled) {
             nxt = nxt.nextElementSibling;
         }
-        trgt.value ? nxt.focus() : prv.focus();
+        trgt.value ? (nxt && nxt.focus()) : (prv && prv.focus());
         console.log(topString, bottomString);
     }
 

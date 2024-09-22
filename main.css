@@ -29,8 +29,11 @@ div {
     border:none;
     background: #00dbe0;
 }
-#hint-div button:hover {
+#hint:hover {
     cursor: help;
+}
+#hint-div button:enabled:hover {
+  background: #00cdd1;
 }
 .sentence-hint {
     font-size: 14px;
