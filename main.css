@@ -6,13 +6,15 @@ body {
     font-style: italic;
     text-transform: capitalize;
     align-content: center;
-    transition: opacity 1s;
 }
 
 div {
     margin: 10px auto;
     width: 90%;
     text-align:center;
+}
+#main {
+  transition: opacity 0.2s;
 }
 .hint-div {
     padding: 10px;
@@ -26,7 +28,6 @@ div {
     height: 30px;
     border:none;
     background: #00dbe0;
-
 }
 #hint-div button:hover {
     cursor: help;
@@ -111,4 +112,12 @@ input.incorrect {
 input.solved {
      animation: shake-up 0.2s ease-in-out 0s 2;
      box-shadow: 0 0 0.3rem #2cff00;
+}
+#next:enabled {
+  animation: shake-up 0.2s ease-in-out 0s 2;
+  box-shadow: 0 0 0.3rem #2cff00;
+}
+#hint-div > button#reset {
+  background:red;
+  
 }
