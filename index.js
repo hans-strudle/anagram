@@ -94,8 +94,8 @@ const PUZZLES = [
         ],
         letter_hints: [
             {letter: "T", pos: 8, top: true},
-            {letter: "E", pos: 4, top: false}
-            {letter: "A", pos: 7, top: false}
+            {letter: "E", pos: 4, top: false},
+            {letter: "A", pos: 7, top: false},
             {letter: "A", pos: 7, top: true}
         ],
     },
