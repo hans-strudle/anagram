@@ -188,6 +188,7 @@ function load() {
     mainDiv.style.opacity = 1;
     const topAnswerDiv = document.getElementById("top-answer");
     const bottomAnswerDiv = document.getElementById("bottom-answer");
+    const currentGuessInput = document.getElementById('current-guess');
 
     const topHintDiv = document.getElementById("top-hint");
     const bottomHintDiv = document.getElementById("bottom-hint");
@@ -222,7 +223,18 @@ function load() {
 
     topMainHintDiv.innerHTML = top_description;
     // bottomMainHintDiv.innerHTML = bottom_description; 
+    let currentDescriptionCounter = 0;
     console.log(descriptions);
+    let currentDescription = descriptions[currentDescriptionCounter];
+    currentGuessInput.placeholder = currentDescription.desc;
+    currentGuessInput.oninput = function(e) {
+        let g = e.target.value;
+        if (g.toUpperCase() == currentDescription.answer) {
+            console.log("GOOD!");
+            
+        }
+        console.log(g);
+    }
     for (let i in descriptions) {
         let d = descriptions[i];
         let li = document.createElement("li");
@@ -366,7 +378,7 @@ function load() {
         let lleft = b2.left + b2.width / 2;
         let ltop = b2.top; 
 
-        /*if (fleft > lleft) {
+        if (fleft > lleft) {
             console.log(fleft, lleft);
             let t = fleft;
             let t2 = ftop;
@@ -374,7 +386,7 @@ function load() {
             ftop = ltop
             lleft = t;
             ltop = t2;
-        }*/
+        }
 
         newLine.setAttribute('x1', fleft);
         newLine.setAttribute('y1', ftop);
@@ -388,8 +400,17 @@ function load() {
         var newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         newPath.setAttribute('d', d);
         newPath.setAttribute('id', 'textPath' + counter);
-        newPath.setAttribute('style', `stroke: ${color}; stroke-width: 2;`);
+        newPath.__idx = counter;
+        newPath.setAttribute('style', `cursor: pointer; pointer-events: all; stroke: ${color}; stroke-width: 2;`);
         document.getElementById("line").append(newPath);
+
+        let currentDescription = descriptions[counter].desc;
+        newPath.addEventListener("click", (e) => {
+            let idx = e.target.__idx;
+            let currentDescription = descriptions[idx];
+            currentGuessInput.placeholder = currentDescription.desc;
+            console.log(e);
+        })
 
         var txtPath = document.createElementNS('http://www.w3.org/2000/svg', 'textPath');
         var txt= document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -398,13 +419,23 @@ function load() {
         // txt.setAttribute('x', midx);
         // txt.setAttribute('y', midy);
         // txt.setAttribute('rotate', 90);
+        txt.__idx = counter;
+        txtPath.__idx = counter;
         txtPath.setAttribute('href', '#textPath' + counter++);
         txtPath.setAttribute('startOffset', '25%');
-        // txtPath.innerHTML = 'asdfasdfasdf';
+        txtPath.innerHTML = currentDescription;
         txt.setAttribute('class', 'hintText');
+        txt.setAttribute('style', `cursor: pointer; pointer-events: all; stroke: ${color}; stroke-width: 2;`);
         txtPath.setAttribute('class', 'hintText');
         document.getElementById("line").append(txt);
         txt.appendChild(txtPath);
+        txt.addEventListener("click", (e) => {
+            let idx = e.target.__idx;
+            console.log(idx);
+            let currentDescription = descriptions[idx];
+            currentGuessInput.placeholder = currentDescription.desc;
+            console.log(e);
+        })
     }
 
     let tops = [];

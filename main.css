@@ -34,13 +34,10 @@ div {
 
 .hintText {
     font-size: 12px;
-    color: red;
     opacity: 0.4;
 }
 
 .hintText:hover {
-    color: red;
-    font-size: 14px;
     opacity: 1;
 }
 
@@ -106,7 +103,7 @@ input {
     border: none;
     border-bottom: 2px solid #00BCD4;
     background: #fdfdfd;
-    text-transform: capitalize;
+    text-transform: uppercase;
     font-style: italic;
 }
 
@@ -114,6 +111,11 @@ input:disabled {
     text-decoration: underline #4CAF50;
     color: #00BCD4;
     background: #cfcfcf;
+}
+
+#current-guess {
+    width: 250px;
+    font-size: 24px;
 }
 
 @keyframes shake-up {
