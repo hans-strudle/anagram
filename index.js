@@ -2,15 +2,26 @@
 
 const PUZZLES = [
     {
-        top_word: "adobe",
-        top_description: "kind of clay",
-        bottom_word: "abode",
+        top_word: "forest",
+        top_description: "NATURE vs NURTURE",
+        bottom_word: "foster",
         bottom_description: "place of residence",
         hints: [
             {type: "sentence", top: true, hint: "sun dried brick"},
             {type: "type", top: true, hint: "(Noun)"},
             {type: "type", top: false, hint: "(Noun)"},
             {type: "sentence", top: false, hint: "Humble."},
+        ],
+        descriptions: [
+            {answer: "FACE OFF", desc: "BATTLE (2)"},
+            {answer: "ORZO", desc: "PASTA TYPE"},
+            {answer: "REGISTER", desc: "COMPREHEND"},
+            {answer: "EDGE", desc: "BORDER"},
+            {answer: "STRESS", desc: "WORRY"},
+            {answer: "TAUNT", desc: "MOCK"},
+        ],
+        matches: [
+            0, 1, 5, 4, 2, 3
         ],
         letter_hints: [
             {letter: "O", pos: 2, top: true},
@@ -117,6 +128,15 @@ const PUZZLES = [
     },
 
 ];
+const colors = [
+    '#7ECE50',
+    '#50BDCE',
+    '#A050CE',
+    '#CF4F86',
+    '#C6CF4F',
+    '#4FCF98',
+    '#584FCF',
+];
 
 var LocalStorage = {
     _PREFIX: '__ANAGRAM_',
@@ -153,6 +173,8 @@ function load() {
     let bottom_description = CURRENT_PUZZLE.bottom_description;
     let hints = CURRENT_PUZZLE.hints;
     let letter_hints = CURRENT_PUZZLE.letter_hints;
+    let descriptions = CURRENT_PUZZLE.descriptions;
+    let matches = CURRENT_PUZZLE.matches;
 
     let letterHintCounter = 0;
     let hintCounter = 0;
@@ -192,14 +214,24 @@ function load() {
     
     const topMainHintDiv = document.getElementById("top-main-hint");
     const bottomMainHintDiv = document.getElementById("bottom-main-hint");
+    const descriptionList = document.getElementById("description-list");
 
     const topSentenceHintDiv = document.getElementById("top-sentence-hint");
     const bottomSentenceHintDiv = document.getElementById("bottom-sentence-hint");
 
     topMainHintDiv.innerHTML = top_description;
-    bottomMainHintDiv.innerHTML = bottom_description; 
+    // bottomMainHintDiv.innerHTML = bottom_description; 
+    console.log(descriptions);
+    for (let i in descriptions) {
+        let d = descriptions[i];
+        let li = document.createElement("li");
+        li.className = 'description';
+        li.innerHTML = d.desc;
+        li.style.color = colors[i];
+        descriptionList.appendChild(li);
+    }
 
-    hintButton.onclick = (e) => {
+    /*hintButton.onclick = (e) => {
         let hint = hints[hintCounter];
         let hintDiv = hint.top ? topMainHintDiv : bottomMainHintDiv;
         switch (hint.type) {
@@ -220,9 +252,9 @@ function load() {
         }
         hintCounter++;
         hintCountSpan.innerHTML = hintCounter;
-    }
+    }*/
 
-    letterHintButton.onclick = (e) => {
+    /*letterHintButton.onclick = (e) => {
         let hint = letter_hints[letterHintCounter];
         let div = hint.top ? topAnswerDiv : bottomAnswerDiv;
         let i = div.children[hint.pos];
@@ -230,17 +262,28 @@ function load() {
         i.disabled = true;
         letterHintCounter++;
         letterHintCountSpan.innerHTML = letterHintCounter;
+    }*/
+
+    let revealAnswer = (idx) => {
+        let descs = descriptionList.children;
+        console.log(descs[idx]);
+        descs[idx].innerHTML += '&nbsp; - &nbsp;' + descriptions[idx].answer;
+
     }
 
     checkButton.onclick = (e) => {
         let cl = ' incorrect';
         const topInputs = document.querySelectorAll('#top-answer input');
         const bottomInputs = document.querySelectorAll('#bottom-answer input');
-        const topAnswer = Array.from(topInputs)
+
+        const topLetters = Array.from(topInputs);
+        const botLetters = Array.from(bottomInputs);
+
+        const topAnswer = topLetters
             .map(e => e.value)
             .join('')
             .toLowerCase();
-        const bottomAnswer = Array.from(bottomInputs)
+        const bottomAnswer = botLetters
             .map(e => e.value)
             .join('')
             .toLowerCase();
@@ -252,9 +295,22 @@ function load() {
             nextButton.disabled = false;
             // alert("solved!");
         }
-        let inputs = getInputs();
-        for (let input of inputs) {
-            input.className = 'charinput' + cl;
+        let inputs = Array.from(getInputs());
+        for (let i in inputs) {
+            if (inputs[i].value == top_word[i] ||
+                inputs[i].value == bottom_word[i - bottom_word.length]) {
+                // Letter is in correct place
+                inputs[i].className = 'charinput solved'
+                if (inputs[i].value == top_word[i] && !inputs[i].disabled) {
+                    revealAnswer(i);
+                }
+                inputs[i].disabled = true;
+            } else {
+                inputs[i].className = 'charinput incorrect'
+                inputs[i].value = '';
+
+            }
+            
         }
     }
 
@@ -268,12 +324,13 @@ function load() {
             bottomSentenceHintDiv.innerHTML = '';
             LocalStorage.increment('PUZZLE_COUNTER');
             load();
-        }, 500);
+        }, 50);
         // load();
     }
 
     let onInput = (e) => {
         let back = e.inputType == 'deleteContentBackward';
+        console.log(e);
         let trgt = e.target;
         let prv = trgt.previousElementSibling;
         if (back) {
@@ -285,28 +342,108 @@ function load() {
         }
         trgt.value ? (nxt && nxt.focus()) : (prv && prv.focus());
         // console.log(topString, bottomString);
+        let inputs = Array.from(getInputs());
+        let match = inputs[trgt.__match];
+        match.value = trgt.value;
+        console.log(match);
     }
 
+    let counter = 0;
+
+    let drawLine = (e1, e2) => {
+        // var b1 = document.getElementById('btn1').getBoundingClientRect();
+        // var b2 = document.getElementById('btn2').getBoundingClientRect();
+        var b1 = e1.getBoundingClientRect();
+        var b2 = e2.getBoundingClientRect();
+        console.log(b1);
+        console.log(b2);
+        var newLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        newLine.setAttribute('id', 'line1');
+
+        let fleft = b1.left + b1.width / 2;
+        let ftop = b1.top +  b1.height;
+        let lleft = b2.left + b2.width / 2;
+        let ltop = b2.top; 
+
+        if (fleft > lleft) {
+            console.log(fleft, lleft);
+            let t = fleft;
+            let t2 = ftop;
+            fleft = lleft;
+            ftop = ltop
+            lleft = t;
+            ltop = t2;
+        }
+
+        newLine.setAttribute('x1', fleft);
+        newLine.setAttribute('y1', ftop);
+        newLine.setAttribute('x2', lleft);
+        newLine.setAttribute('y2', ltop);
+
+        let d = `M${fleft} ${ftop} L${lleft} ${ltop}`;
+        let color = colors[counter];
+        newLine.setAttribute('style', `stroke: ${color}; stroke-width: 2;`);
+        // document.getElementById("line").append(newLine);
+        var newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        newPath.setAttribute('d', d);
+        newPath.setAttribute('id', 'textPath' + counter);
+        newPath.setAttribute('style', `stroke: ${color}; stroke-width: 2;`);
+        document.getElementById("line").append(newPath);
+
+        var txtPath = document.createElementNS('http://www.w3.org/2000/svg', 'textPath');
+        var txt= document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        var midx = ((b1.left + b1.width / 2) + (b2.left + b2.width / 2)) / 2
+        var midy = ((b1.top + b1.height / 2) + (b2.top + b2.height / 2)) / 2
+        // txt.setAttribute('x', midx);
+        // txt.setAttribute('y', midy);
+        // txt.setAttribute('rotate', 90);
+        txtPath.setAttribute('href', '#textPath' + counter++);
+        txtPath.setAttribute('startOffset', '25%');
+        // txtPath.innerHTML = 'asdfasdfasdf';
+        txt.setAttribute('class', 'hintText');
+        txtPath.setAttribute('class', 'hintText');
+        document.getElementById("line").append(txt);
+        txt.appendChild(txtPath);
+    }
+
+    let tops = [];
+    let bots = [];
+
     for (let w in top_word) {
+        console.log(w);
         let inputElement = document.createElement("input");
         inputElement.pattern = "[A-Za-z]*";
         inputElement.__ana = "top";
         inputElement.className = "charinput";
         inputElement.maxLength = 1;
         inputElement.disabled = false;
+        inputElement.__position = parseInt(w);
+        inputElement.__match = matches[parseInt(w)] + top_word.length;
         inputElement.addEventListener("input",onInput);
         topAnswerDiv.appendChild(inputElement);
+        tops.push(inputElement);
     }
 
     for (let w in bottom_word) {
+        let revMatch = matches.indexOf(parseInt(w));
         let inputElement = document.createElement("input");
+        inputElement.pattern = "[A-Za-z]*";
         inputElement.__ana = "bottom";
         inputElement.className = "charinput";
         inputElement.maxLength = 1;
         inputElement.disabled = false;
+        inputElement.__position = parseInt(w) + top_word.length;
+        inputElement.__match = revMatch;
         inputElement.addEventListener("input",onInput);
         bottomAnswerDiv.appendChild(inputElement);
+        bots.push(inputElement);
     }
+    setTimeout(function(){
+        for (let i of matches) {
+            console.log(i, matches[i]);
+            drawLine(tops[i], bots[matches[i]]);
+        }
+    }, 500);
     console.log("Done Loading");
 }
 
