@@ -15,10 +15,10 @@ const PUZZLES = [
         descriptions: [
             {answer: "FACE OFF", desc: "BATTLE (2)"},
             {answer: "ORZO", desc: "PASTA TYPE"},
+            {answer: "TAUNT", desc: "MOCK"},
+            {answer: "STRESS", desc: "WORRY"},
             {answer: "REGISTER", desc: "COMPREHEND"},
             {answer: "EDGE", desc: "BORDER"},
-            {answer: "STRESS", desc: "WORRY"},
-            {answer: "TAUNT", desc: "MOCK"},
         ],
         matches: [
             0, 1, 5, 4, 2, 3
@@ -366,7 +366,7 @@ function load() {
         let lleft = b2.left + b2.width / 2;
         let ltop = b2.top; 
 
-        if (fleft > lleft) {
+        /*if (fleft > lleft) {
             console.log(fleft, lleft);
             let t = fleft;
             let t2 = ftop;
@@ -374,7 +374,7 @@ function load() {
             ftop = ltop
             lleft = t;
             ltop = t2;
-        }
+        }*/
 
         newLine.setAttribute('x1', fleft);
         newLine.setAttribute('y1', ftop);
