@@ -163,6 +163,7 @@ var LocalStorage = {
 }
 
 function load() {
+    localStorage.clear();
     console.log("Loading");
     const PUZZLE_COUNTER = LocalStorage.get_or_set('PUZZLE_COUNTER', 0);
     const CURRENT_PUZZLE = PUZZLES[PUZZLE_COUNTER];
