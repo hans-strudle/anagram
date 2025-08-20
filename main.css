@@ -1,14 +1,27 @@
+/* CSS HEX */
+colors {
+    --rich-black: #001219ff;
+    --midnight-green: #005f73ff;
+    --dark-cyan: #0a9396ff;
+    --tiffany-blue: #94d2bdff;
+    --vanilla: #e9d8a6ff;
+    --gamboge: #ee9b00ff;
+    --alloy-orange: #ca6702ff;
+    --rust: #bb3e03ff;
+    --rufous: #ae2012ff;
+    --auburn: #9b2226ff;
+}
+
 body {
     color: #282828;
     background-color: #e4e4e4;
     font-family: monospace;
     font-size: 28px;
-    font-style: italic;
     text-transform: capitalize;
     align-content: center;
     font-family: "Titillium Web", sans-serif;
     font-weight: 300;
-    font-style: italic;
+    /*font-style: italic;*/
 }
 
 div {
@@ -33,8 +46,8 @@ div {
 }
 
 .hintText {
-    font-size: 12px;
-    opacity: 0.4;
+    font-size: 16px;
+    opacity: 0.9;
 }
 
 .hintText:hover {
@@ -49,7 +62,24 @@ div {
     margin-left: 3px;
     font-weight: 600;
     font-style: normal;
+    border-bottom: 1px solid black;
 }
+input {
+    font-size: 32px;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid #00BCD4;
+    background: #fdfdfd;
+    text-transform: uppercase;
+    font-style: italic;
+}
+#current-guess {
+    width: 250px;
+    font-size: 24px;
+}
+
 
 #description-list {
     max-width: 290px;
@@ -95,17 +125,7 @@ div {
     font-size: 16px;
 }
 
-input {
-    font-size: 32px;
-    width: 48px;
-    height: 48px;
-    text-align: center;
-    border: none;
-    border-bottom: 2px solid #00BCD4;
-    background: #fdfdfd;
-    text-transform: uppercase;
-    font-style: italic;
-}
+
 
 input:disabled {
     text-decoration: underline #4CAF50;
@@ -113,10 +133,7 @@ input:disabled {
     background: #cfcfcf;
 }
 
-#current-guess {
-    width: 250px;
-    font-size: 24px;
-}
+
 
 @keyframes shake-up {
     0% {
@@ -178,4 +195,31 @@ input.solved {
 
 #hint-div > button#reset {
     background: red;
+}
+  #top-answer {
+      margin-bottom: 50px;
+  }
+
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+  input {
+      width: 32px;
+      height: 32px;
+  }
+  #current-guess {
+    width: 150px;
+    font-size: 18px;
+  }
+  #description-list {
+      max-width: 500px;
+      width: 70%;
+  }
+  #top-answer {
+      margin-bottom: 50px;
+  }
+  .hintText {
+      font-size: 12px;
+  }
 }

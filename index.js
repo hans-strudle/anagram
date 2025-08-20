@@ -13,12 +13,12 @@ const PUZZLES = [
             {type: "sentence", top: false, hint: "Humble."},
         ],
         descriptions: [
-            {answer: "FACE OFF", desc: "BATTLE (2)"},
-            {answer: "ORZO", desc: "PASTA TYPE"},
-            {answer: "TAUNT", desc: "MOCK"},
-            {answer: "STRESS", desc: "WORRY"},
-            {answer: "REGISTER", desc: "COMPREHEND"},
-            {answer: "EDGE", desc: "BORDER"},
+            {answer: "FACE OFF", desc: "BATTLE (2)", p: 0},
+            {answer: "ORZO", desc: "PASTA TYPE", p: 1},
+            {answer: "REGISTER", desc: "COMPREHEND", p: 5},
+            {answer: "EDGE", desc: "BORDER", p: 4},
+            {answer: "STRESS", desc: "WORRY", p: 2},
+            {answer: "TAUNT", desc: "MOCK", p: 3},
         ],
         matches: [
             0, 1, 5, 4, 2, 3
@@ -29,114 +29,44 @@ const PUZZLES = [
         ],
     },
     {
-        top_word: "reward",
-        top_description: "winnings",
-        bottom_word: "drawer",
-        bottom_description: "a place to put your stuff",
+        top_word: "march",
+        top_description: "LUCK",
+        bottom_word: "charm",
+        bottom_description: "",
         hints: [
-            {type: "sentence", top: true, hint: "asdfasdf"},
-            {type: "type", top: true, hint: "(Verb)"},
-            {type: "type", top: false, hint: "(Noun)"},
-            {type: "sentence", top: false, hint: "Clothes"},
-        ],
-        letter_hints: [
-            {letter: "E", pos: 1, top: true},
-            {letter: "E", pos: 4, top: false}
-        ],
-    },
-    {
-        top_word: "angle",
-        top_description: "approach",
-        bottom_word: "angel",
-        bottom_description: "spiritual being",
-        hints: [
-            {type: "sentence", top: true, hint: "way to approach an issue"},
+            {type: "sentence", top: true, hint: "sun dried brick"},
             {type: "type", top: true, hint: "(Noun)"},
             {type: "type", top: false, hint: "(Noun)"},
-            {type: "sentence", top: false, hint: "messenger of god"},
+            {type: "sentence", top: false, hint: "Humble."},
+        ],
+        descriptions: [
+            {answer: "MAUSELEUM", desc: "TOMB", p: 0},
+            {answer: "ARENA", desc: "STADIUM", p: 1},
+            {answer: "ROSTER", desc: "LIST", p: 5},
+            {answer: "CIVIC", desc: "MUNICIPAL", p: 2},
+            {answer: "HUNCH", desc: "SUSPICION", p: 4},
+        ],
+        matches: [
+            4, 2, 3, 0, 1
         ],
         letter_hints: [
-            {letter: "G", pos: 2, top: true},
-            {letter: "E", pos: 3, top: false}
+            {letter: "O", pos: 2, top: true},
+            {letter: "D", pos: 3, top: false}
         ],
     },
-    {
-        top_word: "angle",
-        top_description: "approach",
-        bottom_word: "angel",
-        bottom_description: "spiritual being",
-        hints: [
-            {type: "sentence", top: true, hint: "way to approach an issue"},
-            {type: "type", top: true, hint: "(Noun)"},
-            {type: "type", top: false, hint: "(Noun)"},
-            {type: "sentence", top: false, hint: "messenger of god"},
-        ],
-        letter_hints: [
-            {letter: "G", pos: 2, top: true},
-            {letter: "E", pos: 3, top: false}
-        ],
-    },
-    {
-        top_word: "blamed",
-        top_description: "assigned responsibility",
-        bottom_word: "bedlam",
-        bottom_description: "scene of uproar",
-        hints: [
-            {type: "sentence", top: true, hint: "placed fault on"},
-            {type: "type", top: true, hint: "(Verb)"},
-            {type: "type", top: false, hint: "(Noun)"},
-        ],
-        letter_hints: [
-            {letter: "M", pos: 3, top: true},
-            {letter: "E", pos: 1, top: false},
-            {letter: "L", pos: 3, top: false}
-        ],
-    },
-    {
-        top_word: "conversation",
-        top_description: "a chat",
-        bottom_word: "conservation",
-        bottom_description: "prevention of wast",
-        hints: [
-            {type: "type", top: true, hint: "(Noun)"},
-            {type: "sentence", top: true, hint: "through talking"},
-            {type: "type", top: false, hint: "(Noun)"},
-            {type: "sentence", top: false, hint: "save the earth"},
-        ],
-        letter_hints: [
-            {letter: "T", pos: 8, top: true},
-            {letter: "E", pos: 4, top: false},
-            {letter: "A", pos: 7, top: false},
-            {letter: "A", pos: 7, top: true}
-        ],
-    },
-    {
-        top_word: "angle",
-        top_description: "approach",
-        bottom_word: "angel",
-        bottom_description: "spiritual being",
-        hints: [
-            {type: "sentence", top: true, hint: "way to approach an issue"},
-            {type: "type", top: true, hint: "(Noun)"},
-            {type: "type", top: false, hint: "(Noun)"},
-            {type: "sentence", top: false, hint: "messenger of god"},
-        ],
-        letter_hints: [
-            {letter: "G", pos: 2, top: true},
-            {letter: "E", pos: 3, top: false}
-        ],
-    },
-
-];
+    ];
 const colors = [
-    '#7ECE50',
-    '#50BDCE',
-    '#A050CE',
-    '#CF4F86',
-    '#C6CF4F',
-    '#4FCF98',
-    '#584FCF',
-];
+    "#e97abb",
+    "#e5868e",
+    // "#dfe690",
+    "#85eab7",
+    "#6abefa",
+    "#6e91f9",
+    "#8578fa",
+    "#cf83fb",
+    "#ebebac"
+]
+
 
 var LocalStorage = {
     _PREFIX: '__ANAGRAM_',
@@ -179,6 +109,7 @@ function load() {
 
     let letterHintCounter = 0;
     let hintCounter = 0;
+    let currentDescriptionCounter = 0;
 
     const getInputs = () => {
         return document.querySelectorAll("#inputs input");
@@ -189,6 +120,7 @@ function load() {
     const topAnswerDiv = document.getElementById("top-answer");
     const bottomAnswerDiv = document.getElementById("bottom-answer");
     const currentGuessInput = document.getElementById('current-guess');
+    const currentGuessButton = document.getElementById('check-desc');
 
     const topHintDiv = document.getElementById("top-hint");
     const bottomHintDiv = document.getElementById("bottom-hint");
@@ -213,7 +145,7 @@ function load() {
     currentPuzzleSpan.innerHTML = PUZZLE_COUNTER;
     const totalPuzzleSpan = document.getElementById("total-puzzles");
     totalPuzzleSpan.innerHTML = PUZZLES.length;
-    
+
     const topMainHintDiv = document.getElementById("top-main-hint");
     const bottomMainHintDiv = document.getElementById("bottom-main-hint");
     const descriptionList = document.getElementById("description-list");
@@ -223,24 +155,60 @@ function load() {
 
     topMainHintDiv.innerHTML = top_description;
     // bottomMainHintDiv.innerHTML = bottom_description; 
-    let currentDescriptionCounter = 0;
     console.log(descriptions);
     let currentDescription = descriptions[currentDescriptionCounter];
     currentGuessInput.placeholder = currentDescription.desc;
     currentGuessInput.oninput = function(e) {
         let g = e.target.value;
-        if (g.toUpperCase() == currentDescription.answer) {
-            console.log("GOOD!");
-            
+        let first = g[0];
+        console.log(currentDescriptionCounter, first);
+        let inputs = Array.from(getInputs());
+        if (g.length == 1) {
+            inputs[currentDescriptionCounter].value = first;
+            console.log(matches[currentDescriptionCounter]);
+            inputs[matches[currentDescriptionCounter] + top_word.length].value = first
+            // inputs[currentDescriptionCounter].dispatchEvent(new Event('input'));
+
         }
         console.log(g);
+    }
+    currentGuessButton.onclick = function(e) {
+        currentDescription = descriptions[currentDescriptionCounter];
+        let guess = currentGuessInput.value.toUpperCase();
+        let first = guess[0];
+        let last = guess[guess.length - 1];
+        let answer = currentDescription.answer.toUpperCase();
+        if (first == last && first == answer[0] ) {
+            console.log("GOOD!");
+            currentGuessInput.className = 'solved';
+            tops[currentDescriptionCounter].value = guess[0];
+            tops[currentDescriptionCounter].dispatchEvent(new Event('input'));
+            revealAnswer(currentDescriptionCounter);
+        } else {
+            currentGuessInput.className = 'incorrect';
+        }
     }
     for (let i in descriptions) {
         let d = descriptions[i];
         let li = document.createElement("li");
         li.className = 'description';
-        li.innerHTML = d.desc;
         li.style.color = colors[i];
+        let a = document.createElement('a');
+        a.style.color = colors[i];
+        a.innerHTML = d.desc;
+        a.href = '';
+        a.__idx = i;
+        a.onclick = (e) => {
+            e.preventDefault();
+            let idx = parseInt(e.target.__idx);
+            currentDescriptionCounter = idx;
+            let currentDescription = descriptions[idx];
+            currentGuessInput.className = '';
+            currentGuessInput.placeholder = currentDescription.desc;
+            currentGuessInput.value = '';
+            return false;
+        }
+        li.appendChild(a);
         descriptionList.appendChild(li);
     }
 
@@ -347,7 +315,7 @@ function load() {
         let trgt = e.target;
         let prv = trgt.previousElementSibling;
         if (back) {
-            prv.focus()
+            prv?.focus()
         }
         let nxt = trgt.nextElementSibling;
         while (nxt && nxt.disabled) {
@@ -386,7 +354,7 @@ function load() {
             ftop = ltop
             lleft = t;
             ltop = t2;
-        }
+        };
 
         newLine.setAttribute('x1', fleft);
         newLine.setAttribute('y1', ftop);
@@ -403,14 +371,18 @@ function load() {
         newPath.__idx = counter;
         newPath.setAttribute('style', `cursor: pointer; pointer-events: all; stroke: ${color}; stroke-width: 2;`);
         document.getElementById("line").append(newPath);
-
         let currentDescription = descriptions[counter].desc;
-        newPath.addEventListener("click", (e) => {
+        let descClick = (e) => {
             let idx = e.target.__idx;
+            currentDescriptionCounter = idx;
             let currentDescription = descriptions[idx];
+            currentGuessInput.className = '';
             currentGuessInput.placeholder = currentDescription.desc;
+            currentGuessInput.value = '';
             console.log(e);
-        })
+        }
+
+        newPath.addEventListener("click", descClick)
 
         var txtPath = document.createElementNS('http://www.w3.org/2000/svg', 'textPath');
         var txt= document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -421,21 +393,16 @@ function load() {
         // txt.setAttribute('rotate', 90);
         txt.__idx = counter;
         txtPath.__idx = counter;
-        txtPath.setAttribute('href', '#textPath' + counter++);
-        txtPath.setAttribute('startOffset', '25%');
+        txtPath.setAttribute('href', '#textPath' + counter);
+        counter++;
+        txtPath.setAttribute('startOffset', '10%');
         txtPath.innerHTML = currentDescription;
         txt.setAttribute('class', 'hintText');
         txt.setAttribute('style', `cursor: pointer; pointer-events: all; stroke: ${color}; stroke-width: 2;`);
         txtPath.setAttribute('class', 'hintText');
         document.getElementById("line").append(txt);
         txt.appendChild(txtPath);
-        txt.addEventListener("click", (e) => {
-            let idx = e.target.__idx;
-            console.log(idx);
-            let currentDescription = descriptions[idx];
-            currentGuessInput.placeholder = currentDescription.desc;
-            console.log(e);
-        })
+        txt.addEventListener("click", descClick)
     }
 
     let tops = [];
@@ -448,7 +415,7 @@ function load() {
         inputElement.__ana = "top";
         inputElement.className = "charinput";
         inputElement.maxLength = 1;
-        inputElement.disabled = false;
+        // inputElement.disabled = true;
         inputElement.__position = parseInt(w);
         inputElement.__match = matches[parseInt(w)] + top_word.length;
         inputElement.addEventListener("input",onInput);
@@ -463,19 +430,17 @@ function load() {
         inputElement.__ana = "bottom";
         inputElement.className = "charinput";
         inputElement.maxLength = 1;
-        inputElement.disabled = false;
+        // inputElement.disabled = true;
         inputElement.__position = parseInt(w) + top_word.length;
         inputElement.__match = revMatch;
         inputElement.addEventListener("input",onInput);
         bottomAnswerDiv.appendChild(inputElement);
         bots.push(inputElement);
     }
-    setTimeout(function(){
-        for (let i of matches) {
-            console.log(i, matches[i]);
-            drawLine(tops[i], bots[matches[i]]);
-        }
-    }, 500);
+    for (let i = 0; i< matches.length; i++) {
+        console.log('match: ', i, matches[i]);
+        drawLine(tops[i], bots[matches[i]]);
+    }
     console.log("Done Loading");
 }
 
